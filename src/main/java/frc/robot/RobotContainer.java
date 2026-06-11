@@ -44,8 +44,8 @@ public class RobotContainer {
     // Subsystems
     private final Drive drive;
 
+    /** Vision consumes addVisionMeasurement from Drive and updates PoseEstimate from Vision.*/
     @SuppressWarnings("unused")
-    /** Vision consumes addVisionMeasurement from Drive and updates PoseEstimate from there.*/
     private final Vision vision;
 
     // Controller
