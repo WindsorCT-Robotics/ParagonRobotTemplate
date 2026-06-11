@@ -10,6 +10,7 @@ package frc.robot;
 import com.pathplanner.lib.auto.AutoBuilder;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Transform3d;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -72,7 +73,7 @@ public class RobotContainer {
 
                 // TODO: Give limelight a name.
                 vision = new Vision(drive::addVisionMeasurement,
-                        new VisionIOLimelight(null, null));
+                        new VisionIOLimelight("vision1", drive::getRotation));
                 break;
 
             case SIM:
@@ -85,7 +86,7 @@ public class RobotContainer {
                         new ModuleIOSim(TunerConstants.BackLeft),
                         new ModuleIOSim(TunerConstants.BackRight));
                 vision = new Vision(drive::addVisionMeasurement,
-                        new VisionIOPhotonVisionSim(null, null, drive::getPose)
+                        new VisionIOPhotonVisionSim("vision1", new Transform3d(), drive::getPose)
                 );
                 break;
 
