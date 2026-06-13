@@ -30,25 +30,25 @@ public class LedCandleIO implements LedIO {
     @Override
     public void setPattern(LedPattern pattern, Color color, int startIndex, int endIndex) {
         switch (pattern) {
-            case TWINKLE:
+            case TWINKLE: 
                 led.setControl(new TwinkleAnimation(startIndex, endIndex).withColor(new RGBWColor(color)));
                 break;
-            case STROBE:
+            case STROBE: 
                 led.setControl(new StrobeAnimation(startIndex, endIndex).withColor(new RGBWColor(color)));
                 break;
-            case SINGLE_FADE:
+            case SINGLE_FADE: 
                 led.setControl(new SingleFadeAnimation(startIndex, endIndex).withColor(new RGBWColor(color)));
                 break;
-            case RGB_FADE:
+            case RGB_FADE: 
                 led.setControl(new RgbFadeAnimation(startIndex, endIndex));
                 break;
-            case LARSON:
+            case LARSON: 
                 led.setControl(new LarsonAnimation(startIndex, endIndex).withColor(new RGBWColor(color)));
                 break;
-            case FIRE:
+            case FIRE: 
                 led.setControl(new FireAnimation(startIndex, endIndex));
                 break;
-            case COLOR_FLOW:
+            case COLOR_FLOW: 
                 led.setControl(new ColorFlowAnimation(startIndex, endIndex).withColor(new RGBWColor(color)));
                 break;
         }

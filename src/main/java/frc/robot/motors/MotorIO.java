@@ -8,12 +8,12 @@ import edu.wpi.first.units.measure.Voltage;
 public interface MotorIO<T extends MotorIO.MotorIOInputs> {
     @AutoLog
     public static class MotorIOInputs {
-        public boolean connected = false;
-        public double positionRotations = 0.0;
-        public double velocityRPM = 0.0;
-        public double voltageVolts = 0.0;
-        public double currentAmps = 0.0;
-        public double powerWatts = 0.0;
+        public boolean connected         = false;
+        public double positionRotations  = 0.0;
+        public double velocityRPM        = 0.0;
+        public double voltageVolts       = 0.0;
+        public double currentAmps        = 0.0;
+        public double powerWatts         = 0.0;
         public double temperatureCelsius = 0.0;
     }
 

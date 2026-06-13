@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class Led extends SubsystemBase {
     private final LedIO ledIO;
     private final LedIOInputsAutoLogged ledInputs = new LedIOInputsAutoLogged();
-    private Optional<LedPattern> prevPattern = Optional.empty();
+    private Optional<LedPattern> prevPattern      = Optional.empty();
 
     public Led(LedIO ledIO) {
         this.ledIO = ledIO;
@@ -33,7 +33,7 @@ public class Led extends SubsystemBase {
         }
     }
 
-    //** On setup, a parameter in another subsystem should have LedConsumer. With the LedConsumer, the allocated Led subsystem will supply the setPattern method, thus when the other subsystem accepts the method and pass in a pattern, it will call the setPattern method. */
+      //** On setup, a parameter in another subsystem should have LedConsumer. With the LedConsumer, the allocated Led subsystem will supply the setPattern method, thus when the other subsystem accepts the method and pass in a pattern, it will call the setPattern method. */
     @FunctionalInterface
     public static interface LedConsumer {
         public void accept(LedPattern pattern);

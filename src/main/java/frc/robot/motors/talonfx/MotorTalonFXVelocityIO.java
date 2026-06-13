@@ -24,7 +24,7 @@ public class MotorTalonFXVelocityIO implements MotorVelocityClosedLoopIO {
     private double targetVelocityRPM = 0.0;
 
     public MotorTalonFXVelocityIO(CanID can, VelocityControlRequest velocityControlRequest) {
-        motor = new TalonFX(can.ID());
+        motor          = new TalonFX(can.ID());
         controlRequest = switch (velocityControlRequest) {
             case DUTYCYCLE -> new VelocityDutyCycle(0);
             case VOLTAGE -> new VelocityVoltage(0);
@@ -71,12 +71,12 @@ public class MotorTalonFXVelocityIO implements MotorVelocityClosedLoopIO {
 
     @Override
     public void updateInputs(MotorVelocityClosedLoopIOInputs inputs) {
-        inputs.connected = motor.isConnected();
-        inputs.positionRotations = motor.getPosition().getValueAsDouble();
-        inputs.velocityRPM = motor.getVelocity().getValue().in(RPM);
-        inputs.voltageVolts = motor.getMotorVoltage().getValueAsDouble();
-        inputs.currentAmps = motor.getStatorCurrent().getValueAsDouble();
-        inputs.powerWatts = inputs.voltageVolts * inputs.currentAmps;
+        inputs.connected          = motor.isConnected();
+        inputs.positionRotations  = motor.getPosition().getValueAsDouble();
+        inputs.velocityRPM        = motor.getVelocity().getValue().in(RPM);
+        inputs.voltageVolts       = motor.getMotorVoltage().getValueAsDouble();
+        inputs.currentAmps        = motor.getStatorCurrent().getValueAsDouble();
+        inputs.powerWatts         = inputs.voltageVolts * inputs.currentAmps;
         inputs.temperatureCelsius = motor.getDeviceTemp().getValueAsDouble();
 
         inputs.targetVelocityRPM = targetVelocityRPM;

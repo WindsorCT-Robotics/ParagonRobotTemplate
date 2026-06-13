@@ -25,7 +25,7 @@ public class MotorTalonFXPositionIO implements MotorPositionClosedLoopIO {
     private double targetPositionRotations = 0.0;
 
     public MotorTalonFXPositionIO(CanID can, PositionControlRequest positionControlRequest) {
-        motor = new TalonFX(can.ID());
+        motor          = new TalonFX(can.ID());
         controlRequest = switch (positionControlRequest) {
             case DUTYCYCLE -> new PositionDutyCycle(0);
             case VOLTAGE -> new PositionVoltage(0);
@@ -72,12 +72,12 @@ public class MotorTalonFXPositionIO implements MotorPositionClosedLoopIO {
 
     @Override
     public void updateInputs(MotorPositionClosedLoopIOInputs inputs) {
-        inputs.connected = motor.isConnected();
-        inputs.positionRotations = motor.getPosition().getValueAsDouble();
-        inputs.velocityRPM = motor.getVelocity().getValue().in(RPM);
-        inputs.voltageVolts = motor.getMotorVoltage().getValueAsDouble();
-        inputs.currentAmps = motor.getStatorCurrent().getValueAsDouble();
-        inputs.powerWatts = inputs.voltageVolts * inputs.currentAmps;
+        inputs.connected          = motor.isConnected();
+        inputs.positionRotations  = motor.getPosition().getValueAsDouble();
+        inputs.velocityRPM        = motor.getVelocity().getValue().in(RPM);
+        inputs.voltageVolts       = motor.getMotorVoltage().getValueAsDouble();
+        inputs.currentAmps        = motor.getStatorCurrent().getValueAsDouble();
+        inputs.powerWatts         = inputs.voltageVolts * inputs.currentAmps;
         inputs.temperatureCelsius = motor.getDeviceTemp().getValueAsDouble();
 
         inputs.targetPositionRotations = targetPositionRotations;
