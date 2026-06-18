@@ -17,7 +17,7 @@ import edu.wpi.first.units.measure.Angle;
 import edu.wpi.first.units.measure.Dimensionless;
 import edu.wpi.first.units.measure.Voltage;
 import frc.robot.CanID;
-import frc.robot.hardware.motors.MotorPositionClosedLoopIO;
+import frc.robot.hardware.motors.io.MotorPositionClosedLoopIO;
 
 public class MotorTalonFXPositionIO implements MotorPositionClosedLoopIO {
   protected final TalonFX motor;

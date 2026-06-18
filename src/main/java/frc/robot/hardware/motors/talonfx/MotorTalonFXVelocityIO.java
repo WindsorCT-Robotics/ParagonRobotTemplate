@@ -16,7 +16,7 @@ import edu.wpi.first.units.measure.AngularVelocity;
 import edu.wpi.first.units.measure.Dimensionless;
 import edu.wpi.first.units.measure.Voltage;
 import frc.robot.CanID;
-import frc.robot.hardware.motors.MotorVelocityClosedLoopIO;
+import frc.robot.hardware.motors.io.MotorVelocityClosedLoopIO;
 
 public class MotorTalonFXVelocityIO implements MotorVelocityClosedLoopIO {
   protected final TalonFX motor;
