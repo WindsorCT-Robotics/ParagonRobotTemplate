@@ -1,11 +1,11 @@
-package frc.robot.motors;
+package frc.robot.hardware.motors;
 
-import frc.robot.motors.MotorIO.MotorIOInputs;
+import frc.robot.hardware.motors.MotorIO.MotorIOInputs;
 
 import org.littletonrobotics.junction.AutoLog;
 
 import edu.wpi.first.units.measure.Angle;
-import frc.robot.motors.MotorPositionClosedLoopIO.MotorPositionClosedLoopIOInputs;
+import frc.robot.hardware.motors.MotorPositionClosedLoopIO.MotorPositionClosedLoopIOInputs;
 
 public interface MotorPositionClosedLoopIO extends MotorIO<MotorPositionClosedLoopIOInputs> {
     @AutoLog

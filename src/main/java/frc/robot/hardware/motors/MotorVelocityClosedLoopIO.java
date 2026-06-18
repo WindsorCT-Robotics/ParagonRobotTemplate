@@ -1,11 +1,11 @@
-package frc.robot.motors;
+package frc.robot.hardware.motors;
 
-import frc.robot.motors.MotorIO.MotorIOInputs;
+import frc.robot.hardware.motors.MotorIO.MotorIOInputs;
 
 import org.littletonrobotics.junction.AutoLog;
 
 import edu.wpi.first.units.measure.AngularVelocity;
-import frc.robot.motors.MotorVelocityClosedLoopIO.MotorVelocityClosedLoopIOInputs;
+import frc.robot.hardware.motors.MotorVelocityClosedLoopIO.MotorVelocityClosedLoopIOInputs;
 
 public interface MotorVelocityClosedLoopIO extends MotorIO<MotorVelocityClosedLoopIOInputs> {
     @AutoLog
