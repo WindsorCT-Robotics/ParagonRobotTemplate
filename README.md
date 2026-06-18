@@ -1,6 +1,8 @@
 Original Source: https://docs.advantagekit.org/data-flow/recording-inputs/io-interfaces
 <br/> This was modified for my understanding.
 
+# IO Structure
+
 <b>Subsystem</b>:
   - Public Interface:
     - Public Interfaces are actions. Actions can be setting velocity, position, etc.
