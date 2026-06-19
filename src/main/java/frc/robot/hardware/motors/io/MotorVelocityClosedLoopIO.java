@@ -17,5 +17,5 @@ public interface MotorVelocityClosedLoopIO extends MotorIO<MotorVelocityClosedLo
     /**
      * @param angularVelocity Sets the angular velocity target.
      */
-    public void setTargetVelocity(AngularVelocity angularVelocity);
+    public default void setTargetVelocity(AngularVelocity angularVelocity) {};
 }

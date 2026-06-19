@@ -17,29 +17,29 @@ public interface MotorIO<T extends MotorIO.MotorIOInputs> {
         public double temperatureCelsius = 0.0;
     }
 
-    public void updateInputs(T inputs);
+    public default void updateInputs(T inputs) {};
     
     //** Actions */
 
     /**
      * Stops the motor.
      */
-    public void stop();
+    public default void stop() {};
 
     /**
      * Sets a duty cycle to the motor.
      * @param percent The percent of the dutycyle applied to the motor.
      */
-    public void setDutyCycle(Dimensionless percent);
+    public default void setDutyCycle(Dimensionless percent) {};
 
     /**
      * Sets a voltage to the motor.
      * @param voltage The voltage applied to the motor.
      */
-    public void setVoltage(Voltage voltage);
+    public default void setVoltage(Voltage voltage) {};
 
     /**
      * Resets the relative encoder to position = 0.
      */
-    public void resetEncoder();
+    public default void resetEncoder() {};
 }

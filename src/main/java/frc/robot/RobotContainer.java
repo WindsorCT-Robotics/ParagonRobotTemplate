@@ -19,17 +19,21 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine;
 import frc.robot.commands.DriveCommands;
 import frc.robot.generated.TunerConstants;
+import frc.robot.hardware.motors.io.MotorVelocityClosedLoopIO;
+import frc.robot.hardware.motors.talonfx.MotorTalonFXVelocityIO;
+import frc.robot.hardware.motors.talonfx.MotorTalonFXVelocityIO.VelocityControlRequest;
 import frc.robot.subsystems.drive.Drive;
 import frc.robot.subsystems.drive.GyroIO;
 import frc.robot.subsystems.drive.GyroIOPigeon2;
 import frc.robot.subsystems.drive.ModuleIO;
 import frc.robot.subsystems.drive.ModuleIOSim;
 import frc.robot.subsystems.drive.ModuleIOTalonFX;
+import frc.robot.subsystems.intake.Intake;
 import frc.robot.subsystems.vision.Vision;
+import frc.robot.subsystems.vision.VisionConstants;
 import frc.robot.subsystems.vision.VisionIO;
 import frc.robot.subsystems.vision.VisionIOLimelight;
 import frc.robot.subsystems.vision.VisionIOPhotonVisionSim;
-
 import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
 
 /**
@@ -49,6 +53,8 @@ public class RobotContainer {
     @SuppressWarnings("unused")
     private final Vision vision;
 
+    private final Intake intake;
+
     // Controller
     private final CommandXboxController controller = new CommandXboxController(0);
 
@@ -64,16 +70,19 @@ public class RobotContainer {
                 // Real robot, instantiate hardware IO implementations
                 // ModuleIOTalonFX is intended for modules with TalonFX drive, TalonFX turn, and
                 // a CANcoder
-                drive = new Drive(
-                        new GyroIOPigeon2(),
-                        new ModuleIOTalonFX(TunerConstants.FrontLeft),
-                        new ModuleIOTalonFX(TunerConstants.FrontRight),
-                        new ModuleIOTalonFX(TunerConstants.BackLeft),
-                        new ModuleIOTalonFX(TunerConstants.BackRight));
+                drive  = new Drive(
+                         new GyroIOPigeon2(),
+                         new ModuleIOTalonFX(TunerConstants.FrontLeft),
+                         new ModuleIOTalonFX(TunerConstants.FrontRight),
+                         new ModuleIOTalonFX(TunerConstants.BackLeft),
+                         new ModuleIOTalonFX(TunerConstants.BackRight));
 
-                // TODO: Give limelight a name.
                 vision = new Vision(drive::addVisionMeasurement,
-                        new VisionIOLimelight("vision1", drive::getRotation));
+                         new VisionIOLimelight(VisionConstants.kCamera0Name, drive::getRotation));
+                
+                intake = new Intake(
+                         new MotorTalonFXVelocityIO(CanIDConstants.kIntakeMotor, VelocityControlRequest.TORQUE));
+
                 break;
 
             case SIM:
@@ -86,25 +95,24 @@ public class RobotContainer {
                         new ModuleIOSim(TunerConstants.BackLeft),
                         new ModuleIOSim(TunerConstants.BackRight));
                 vision = new Vision(drive::addVisionMeasurement,
-                        new VisionIOPhotonVisionSim("vision1", new Transform3d(), drive::getPose)
+                        new VisionIOPhotonVisionSim(VisionConstants.kCamera0Name, new Transform3d(), drive::getPose)
                 );
+
+                intake = new Intake(new MotorVelocityClosedLoopIO() {});
                 break;
 
             default:
                 // Replayed robot, disable IO implementations
                 drive = new Drive(
-                        new GyroIO() {
-                        },
-                        new ModuleIO() {
-                        },
-                        new ModuleIO() {
-                        },
-                        new ModuleIO() {
-                        },
-                        new ModuleIO() {
-                        });
+                        new GyroIO() {},
+                        new ModuleIO() {},
+                        new ModuleIO() {},
+                        new ModuleIO() {},
+                        new ModuleIO() {});
 
-                vision = new Vision(drive::addVisionMeasurement, new VisionIO() {});
+                vision = new Vision((pose, timestamp, stdDevs) -> {}, new VisionIO() {});
+
+                intake = new Intake(new MotorVelocityClosedLoopIO() {});
                 break;
         }
 

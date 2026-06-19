@@ -17,5 +17,5 @@ public interface MotorPositionClosedLoopIO extends MotorIO<MotorPositionClosedLo
     /**
      * @param angle The target angle that the motor will attempt to move towards.
      */
-    public void setTargetPosition(Angle angle);
+    public default void setTargetPosition(Angle angle) {};
 }
