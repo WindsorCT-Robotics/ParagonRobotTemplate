@@ -7,7 +7,7 @@ Original Source: https://docs.advantagekit.org/data-flow/recording-inputs/io-int
   - Public Interface:
     - Public Interfaces are actions. Actions can be setting velocity, position, etc.
   - Control Logic:
-    - Helps actions decide what actions to do. For example: based on range sensor data will decide how much velocity is needed to be set for the motor.
+    - Helps actions decide what tasks to do. For example: based on range sensor data will decide how much velocity is needed to be set for the motor.
 
 <b>IO (Input/Output)</b>:
   - Hardware Interface:
