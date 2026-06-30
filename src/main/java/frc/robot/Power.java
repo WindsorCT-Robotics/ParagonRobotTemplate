@@ -15,7 +15,7 @@ import frc.robot.util.FullSubsystem;
 
 public class Power extends FullSubsystem {
   public record Device(String name, Supplier<Double> currentAmps) {};
-  
+
   private static final Power INSTANCE = new Power();
   public static Power getInstance() { return INSTANCE; }
 

@@ -6,6 +6,8 @@ import edu.wpi.first.units.measure.AngularVelocity;
 import edu.wpi.first.wpilibj.Alert;
 import edu.wpi.first.wpilibj.Alert.AlertType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Power;
+import frc.robot.Power.Device;
 import frc.robot.hardware.motors.io.MotorVelocityClosedLoopIO;
 import frc.robot.hardware.motors.io.MotorVelocityClosedLoopIOInputsAutoLogged;
 
@@ -16,6 +18,7 @@ public class Intake extends SubsystemBase {
   
   public Intake(MotorVelocityClosedLoopIO motor) {
     this.motor = motor;
+    Power.addSubsystem(getSubsystem(), new Device("Intake Motor", () -> inputs.currentAmps));
   }
 
   @Override

@@ -40,7 +40,9 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine;
 import frc.robot.Constants;
+import frc.robot.Power;
 import frc.robot.Constants.Mode;
+import frc.robot.Power.Device;
 import frc.robot.generated.TunerConstants;
 import frc.robot.util.LocalADStarAK;
 import java.util.concurrent.locks.Lock;
@@ -144,6 +146,14 @@ public class Drive extends SubsystemBase {
             (state) -> Logger.recordOutput("Drive/SysIdState", state.toString())),
         new SysIdRoutine.Mechanism(
             (voltage) -> runCharacterization(voltage.in(Volts)), null, this));
+    
+    String[] moduleNames = new String[] {"FL", "FR", "BL", "BR"};
+    Device[] devices = new Device[8];
+    for (int i = 0; i < 4; i++) {
+      devices[i * 2] = new Device(moduleNames[i] + " Drive", modules[i]::getDriveCurrentAmps);
+      devices[i * 2 + 1] = new Device(moduleNames[i] + " Turn", modules[i]::getTurnCurrentAmps);
+    }
+    Power.addSubsystem(getSubsystem(), devices);
   }
 
   @Override
