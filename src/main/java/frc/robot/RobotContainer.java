@@ -19,9 +19,6 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine;
 import frc.robot.commands.DriveCommands;
 import frc.robot.generated.TunerConstants;
-import frc.robot.hardware.motors.io.MotorVelocityClosedLoopIO;
-import frc.robot.hardware.motors.talonfx.MotorTalonFXVelocityIO;
-import frc.robot.hardware.motors.talonfx.MotorTalonFXVelocityIO.VelocityControlRequest;
 import frc.robot.subsystems.drive.Drive;
 import frc.robot.subsystems.drive.GyroIO;
 import frc.robot.subsystems.drive.GyroIOPigeon2;
@@ -29,6 +26,8 @@ import frc.robot.subsystems.drive.ModuleIO;
 import frc.robot.subsystems.drive.ModuleIOSim;
 import frc.robot.subsystems.drive.ModuleIOTalonFX;
 import frc.robot.subsystems.intake.Intake;
+import frc.robot.subsystems.intake.IntakeIO;
+import frc.robot.subsystems.intake.IntakeIOTalonFX;
 import frc.robot.subsystems.vision.Vision;
 import frc.robot.subsystems.vision.VisionConstants;
 import frc.robot.subsystems.vision.VisionIO;
@@ -81,7 +80,7 @@ public class RobotContainer {
                          new VisionIOLimelight(VisionConstants.kCamera0Name, drive::getRotation));
                 
                 intake = new Intake(
-                         new MotorTalonFXVelocityIO(CanIDConstants.kIntakeMotor, VelocityControlRequest.TORQUE));
+                         new IntakeIOTalonFX(CanIDConstants.kIntakeMotor));
 
                 break;
 
@@ -98,7 +97,7 @@ public class RobotContainer {
                         new VisionIOPhotonVisionSim(VisionConstants.kCamera0Name, new Transform3d(), drive::getPose)
                 );
 
-                intake = new Intake(new MotorVelocityClosedLoopIO() {});
+                intake = new Intake(new IntakeIO() {});
                 break;
 
             default:
@@ -112,7 +111,7 @@ public class RobotContainer {
 
                 vision = new Vision((pose, timestamp, stdDevs) -> {}, new VisionIO() {});
 
-                intake = new Intake(new MotorVelocityClosedLoopIO() {});
+                intake = new Intake(new IntakeIO() {});
                 break;
         }
 
