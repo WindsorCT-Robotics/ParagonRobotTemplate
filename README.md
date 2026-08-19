@@ -38,8 +38,7 @@ The following applications are required:
 - Advantage Scope (Replay)
   - https://docs.advantagescope.org/overview/installation
 ### Set Your Team Number
-Edit `.wpilib/wpilib_preferences.json` and set `teamNumber`. Everything else — deploy
-target, roboRIO address — is derived from it.
+Ctrl + Shift + P -> WPILib: Set Team Number
 
 ## Building and Deploying
 Ctrl + Shift + P -> `deploy`
