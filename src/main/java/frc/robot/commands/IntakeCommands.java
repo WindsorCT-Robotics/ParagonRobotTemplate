@@ -7,7 +7,7 @@ import frc.robot.subsystems.intake.Intake;
 
 public class IntakeCommands {
   private IntakeCommands() {}
-  
+
   public static Command intake(Intake intake, AngularVelocity velocity) {
     return Commands.runEnd(() -> intake.setVelocity(velocity), () -> intake.stop(), intake);
   }

@@ -1,28 +1,28 @@
 package frc.robot.subsystems.intake;
 
-import org.littletonrobotics.junction.Logger;
-
 import edu.wpi.first.units.measure.AngularVelocity;
 import edu.wpi.first.wpilibj.Alert;
 import edu.wpi.first.wpilibj.Alert.AlertType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Power;
-import frc.robot.Power.Device;
+import frc.robot.PowerLogger;
+import frc.robot.PowerLogger.Device;
+import org.littletonrobotics.junction.Logger;
 
 public class Intake extends SubsystemBase {
   private final IntakeIO io;
   private final IntakeIOInputsAutoLogged inputs = new IntakeIOInputsAutoLogged();
-  private final Alert disconnectedMotorAlert = new Alert("Intake Motor disconnected.", AlertType.kError);
+  private final Alert disconnectedMotorAlert =
+      new Alert("Intake Motor disconnected.", AlertType.kError);
 
   public Intake(IntakeIO io) {
     this.io = io;
-    Power.addSubsystem(getSubsystem(), new Device("Intake Motor", () -> inputs.statorCurrentAmps));
+    PowerLogger.addSubsystem("Intake", new Device("Motor", () -> inputs.supplyCurrentAmps));
   }
 
   @Override
   public void periodic() {
     io.updateInputs(inputs);
-    Logger.processInputs("Intake/Motor", inputs);
+    Logger.processInputs("Intake/", inputs);
     disconnectedMotorAlert.set(!inputs.connected);
   }
 
