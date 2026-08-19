@@ -13,6 +13,8 @@ import org.littletonrobotics.junction.Logger;
 public class PowerLogger extends FullSubsystem {
   public record Device(String name, DoubleSupplier currentAmps) {}
 
+  // The class PowerLogger must be instantiated for `periodicAfterScheduler()` to work.
+  @SuppressWarnings("unused")
   private static final PowerLogger POWER_LOGGER = new PowerLogger();
   private static final String ROOT = "~MyOutputs/PowerLogger/";
   private static final HashMap<String, Device[]> subsystems = new HashMap<>();
