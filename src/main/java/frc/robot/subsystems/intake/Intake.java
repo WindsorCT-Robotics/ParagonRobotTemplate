@@ -13,7 +13,7 @@ public class Intake extends SubsystemBase {
   private final IntakeIO io;
   private final IntakeIOInputsAutoLogged inputs = new IntakeIOInputsAutoLogged();
   private final Alert disconnectedMotorAlert = new Alert("Intake Motor disconnected.", AlertType.kError);
-  
+
   public Intake(IntakeIO io) {
     this.io = io;
     Power.addSubsystem(getSubsystem(), new Device("Intake Motor", () -> inputs.statorCurrentAmps));
@@ -28,6 +28,7 @@ public class Intake extends SubsystemBase {
 
   public void setVelocity(AngularVelocity velocity) {
     io.setVelocity(velocity);
+    Logger.recordOutput("Intake/VelocitySetpoint", velocity);
   }
 
   public void stop() {
