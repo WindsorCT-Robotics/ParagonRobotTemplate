@@ -147,7 +147,7 @@ public class Bindings {
       String buttonOrder =
           binding.buttons().stream().map(Enum::name).sorted().collect(Collectors.joining("+"));
       String name =
-          "Controllers/" + this.name + "/" + buttonOrder + " | " + binding.command().getName();
+          "~MyOutputs/Controllers/" + this.name + "/" + buttonOrder + " | " + binding.command().getName();
 
       layout.add(new BindingLog(trigger, name));
     }

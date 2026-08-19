@@ -150,7 +150,7 @@ public class Drive extends SubsystemBase {
             new SysIdRoutine.Mechanism(
                 (voltage) -> runCharacterization(voltage.in(Volts)), null, this));
 
-    String[] moduleNames = new String[] {"FL", "FR", "~BL", "~BR"};
+    String[] moduleNames = new String[] {"~FL", "~FR", "BL", "BR"};
     Device[] devices = new Device[8];
     for (int i = 0; i < 4; i++) {
       devices[i * 2] = new Device(moduleNames[i] + " Drive", modules[i]::getDriveCurrentAmps);
@@ -163,7 +163,7 @@ public class Drive extends SubsystemBase {
   public void periodic() {
     odometryLock.lock(); // Prevents odometry updates while reading data
     gyroIO.updateInputs(gyroInputs);
-    Logger.processInputs("Drive/Gyro", gyroInputs);
+    Logger.processInputs("~MyInputs/Drive/Gyro", gyroInputs);
     for (var module : modules) {
       module.periodic();
     }
@@ -178,8 +178,8 @@ public class Drive extends SubsystemBase {
 
     // Log empty setpoint states when disabled
     if (DriverStation.isDisabled()) {
-      Logger.recordOutput("SwerveStates/Setpoints", new SwerveModuleState[] {});
-      Logger.recordOutput("SwerveStates/SetpointsOptimized", new SwerveModuleState[] {});
+      Logger.recordOutput("~MyOutputs/Drive/SwerveStates/Setpoints", new SwerveModuleState[] {});
+      Logger.recordOutput("~MyOutputs/Drive/SwerveStates/SetpointsOptimized", new SwerveModuleState[] {});
     }
 
     // Update odometry
@@ -280,7 +280,7 @@ public class Drive extends SubsystemBase {
   }
 
   /** Returns the module states (turn angles and drive velocities) for all of the modules. */
-  @AutoLogOutput(key = "SwerveStates/Measured")
+  @AutoLogOutput(key = "~MyOutputs/Drive/SwerveStates/Measured")
   private SwerveModuleState[] getModuleStates() {
     SwerveModuleState[] states = new SwerveModuleState[4];
     for (int i = 0; i < 4; i++) {
@@ -299,7 +299,7 @@ public class Drive extends SubsystemBase {
   }
 
   /** Returns the measured chassis speeds of the robot. */
-  @AutoLogOutput(key = "SwerveChassisSpeeds/Measured")
+  @AutoLogOutput(key = "~MyOutputs/Drive/SwerveChassisSpeeds/Measured")
   private ChassisSpeeds getChassisSpeeds() {
     return kinematics.toChassisSpeeds(getModuleStates());
   }
@@ -323,7 +323,7 @@ public class Drive extends SubsystemBase {
   }
 
   /** Returns the current odometry pose. */
-  @AutoLogOutput(key = "Odometry/Robot")
+  @AutoLogOutput(key = "~MyOutputs/Drive/Odometry/Robot")
   public Pose2d getPose() {
     return poseEstimator.getEstimatedPosition();
   }

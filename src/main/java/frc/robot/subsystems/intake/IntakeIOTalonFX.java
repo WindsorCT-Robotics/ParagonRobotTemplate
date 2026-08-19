@@ -34,7 +34,7 @@ public class IntakeIOTalonFX implements IntakeIO {
   public void updateInputs(IntakeIOInputs i) {
     i.connected = motor.isConnected();
     i.hasPiece = false; // Just a test
-    i.positionRotations = motor.getPosition().getValueAsDouble();
+        i.positionRotations = motor.getPosition().getValueAsDouble();
     i.velocityRPM = motor.getVelocity().getValueAsDouble();
     i.voltageVolts = motor.getMotorVoltage().getValueAsDouble();
     i.statorCurrentAmps = motor.getStatorCurrent().getValueAsDouble();

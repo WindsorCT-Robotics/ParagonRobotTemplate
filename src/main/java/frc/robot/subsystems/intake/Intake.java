@@ -22,13 +22,13 @@ public class Intake extends SubsystemBase {
   @Override
   public void periodic() {
     io.updateInputs(inputs);
-    Logger.processInputs("Intake/", inputs);
+    Logger.processInputs("~MyInputs/Intake/", inputs);
     disconnectedMotorAlert.set(!inputs.connected);
   }
 
   public void setVelocity(AngularVelocity velocity) {
     io.setVelocity(velocity);
-    Logger.recordOutput("Intake/VelocitySetpoint", velocity);
+    Logger.recordOutput("~MyOutputs/Intake/VelocitySetpoint", velocity);
   }
 
   public void stop() {

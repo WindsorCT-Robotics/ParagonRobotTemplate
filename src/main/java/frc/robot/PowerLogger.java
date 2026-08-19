@@ -13,7 +13,8 @@ import org.littletonrobotics.junction.Logger;
 public class PowerLogger extends FullSubsystem {
   public record Device(String name, DoubleSupplier currentAmps) {}
 
-  private static final String ROOT = "PowerLogger/";
+  private static final PowerLogger POWER_LOGGER = new PowerLogger();
+  private static final String ROOT = "~MyOutputs/PowerLogger/";
   private static final HashMap<String, Device[]> subsystems = new HashMap<>();
 
   private PowerLogger() {}
@@ -39,8 +40,7 @@ public class PowerLogger extends FullSubsystem {
 
     subsystems.forEach(
         (name, devices) -> {
-          // "~" forces the folder to be lower.
-          name = "~" + name;
+          // "~" forces the folder to be higher.
           double totalSubsystemCurrentAmps = 0.0;
 
           for (Device device : devices) {
@@ -49,22 +49,22 @@ public class PowerLogger extends FullSubsystem {
             totalSubsystemCurrentAmps += amps;
 
             Logger.recordOutput(
-                ROOT + name + "/~Devices/" + device.name() + "/Current", amps, Amps);
+                ROOT + name + "/Devices/" + device.name() + "/Current", amps, Amps);
             Logger.recordOutput(
-                ROOT + name + "/~Devices/" + device.name() + "/Power",
+                ROOT + name + "/Devices/" + device.name() + "/Power",
                 batteryVoltage * amps,
                 Watts);
           }
 
-          Logger.recordOutput(ROOT + name + "/Current", totalSubsystemCurrentAmps, Amps);
+          Logger.recordOutput(ROOT + name + "/~Current", totalSubsystemCurrentAmps, Amps);
           Logger.recordOutput(
-              ROOT + name + "/Power", batteryVoltage * totalSubsystemCurrentAmps, Watts);
+              ROOT + name + "/~Power", batteryVoltage * totalSubsystemCurrentAmps, Watts);
 
           totalCurrentAmps.add(totalSubsystemCurrentAmps);
         });
 
     double amps = totalCurrentAmps.doubleValue();
-    Logger.recordOutput(ROOT + "Current", amps, Amps);
-    Logger.recordOutput(ROOT + "Power", batteryVoltage * amps, Watts);
+    Logger.recordOutput(ROOT + "~Current", amps, Amps);
+    Logger.recordOutput(ROOT + "~Power", batteryVoltage * amps, Watts);
   }
 }
