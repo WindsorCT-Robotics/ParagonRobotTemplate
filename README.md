@@ -35,7 +35,8 @@ The following applications are required:
   - https://pathplanner.dev/home.html
 - Elastic (Dashboard)
   - https://frc-elastic.gitbook.io/docs/getting-started/installation
-
+- Advantage Scope (Replay)
+  - https://docs.advantagescope.org/overview/installation
 ### Set Your Team Number
 Edit `.wpilib/wpilib_preferences.json` and set `teamNumber`. Everything else — deploy
 target, roboRIO address — is derived from it.
