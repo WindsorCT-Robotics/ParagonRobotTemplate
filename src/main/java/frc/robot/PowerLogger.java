@@ -16,6 +16,7 @@ public class PowerLogger extends FullSubsystem {
   // The class PowerLogger must be instantiated for `periodicAfterScheduler()` to work.
   @SuppressWarnings("unused")
   private static final PowerLogger POWER_LOGGER = new PowerLogger();
+
   private static final String ROOT = "~MyOutputs/PowerLogger/";
   private static final HashMap<String, Device[]> subsystems = new HashMap<>();
 
@@ -50,12 +51,9 @@ public class PowerLogger extends FullSubsystem {
 
             totalSubsystemCurrentAmps += amps;
 
+            Logger.recordOutput(ROOT + name + "/Devices/" + device.name() + "/Current", amps, Amps);
             Logger.recordOutput(
-                ROOT + name + "/Devices/" + device.name() + "/Current", amps, Amps);
-            Logger.recordOutput(
-                ROOT + name + "/Devices/" + device.name() + "/Power",
-                batteryVoltage * amps,
-                Watts);
+                ROOT + name + "/Devices/" + device.name() + "/Power", batteryVoltage * amps, Watts);
           }
 
           Logger.recordOutput(ROOT + name + "/~Current", totalSubsystemCurrentAmps, Amps);

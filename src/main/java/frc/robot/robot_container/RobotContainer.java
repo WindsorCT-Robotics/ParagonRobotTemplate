@@ -7,6 +7,8 @@
 
 package frc.robot.robot_container;
 
+import static edu.wpi.first.units.Units.RPM;
+
 import com.pathplanner.lib.auto.AutoBuilder;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -21,6 +23,7 @@ import frc.robot.CanIDConstants;
 import frc.robot.Constants;
 import frc.robot.Robot;
 import frc.robot.commands.DriveCommands;
+import frc.robot.commands.IntakeCommands;
 import frc.robot.generated.TunerConstants;
 import frc.robot.robot_container.Bindings.TriggerBehavior;
 import frc.robot.robot_container.Bindings.XboxCL;
@@ -176,6 +179,9 @@ public class RobotContainer {
         TriggerBehavior.ON_TRUE,
         XboxCL.B);
 
+    driverBindings.bind(
+        IntakeCommands.intake(intake, RPM.of(60)), TriggerBehavior.WHILE_TRUE, XboxCL.A);
+        
     driverBindings.build();
     operatorBindings.build();
   }

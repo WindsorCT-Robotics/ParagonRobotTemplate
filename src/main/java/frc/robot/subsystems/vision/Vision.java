@@ -161,11 +161,14 @@ public class Vision extends SubsystemBase {
 
     // Log summary data
     Logger.recordOutput("~MyOutputs/Vision/Summary/TagPoses", allTagPoses.toArray(new Pose3d[0]));
-    Logger.recordOutput("~MyOutputs/Vision/Summary/RobotPoses", allRobotPoses.toArray(new Pose3d[0]));
     Logger.recordOutput(
-        "~MyOutputs/Vision/Summary/RobotPosesAccepted", allRobotPosesAccepted.toArray(new Pose3d[0]));
+        "~MyOutputs/Vision/Summary/RobotPoses", allRobotPoses.toArray(new Pose3d[0]));
     Logger.recordOutput(
-        "~MyOutputs/Vision/Summary/RobotPosesRejected", allRobotPosesRejected.toArray(new Pose3d[0]));
+        "~MyOutputs/Vision/Summary/RobotPosesAccepted",
+        allRobotPosesAccepted.toArray(new Pose3d[0]));
+    Logger.recordOutput(
+        "~MyOutputs/Vision/Summary/RobotPosesRejected",
+        allRobotPosesRejected.toArray(new Pose3d[0]));
   }
 
   @FunctionalInterface

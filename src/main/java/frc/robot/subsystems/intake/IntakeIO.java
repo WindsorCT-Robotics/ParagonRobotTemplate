@@ -19,20 +19,14 @@ public interface IntakeIO {
   }
 
   public default void updateInputs(IntakeIOInputs inputs) {}
-  ;
 
   public default void stop() {}
-  ;
 
   public default void setDutyCycle(Dimensionless percent) {}
-  ;
 
   public default void setVoltage(Voltage voltage) {}
-  ;
 
   public default void setVelocity(AngularVelocity velocity) {}
-  ;
 
   public default void resetEncoder() {}
-  ;
 }
