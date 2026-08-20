@@ -181,7 +181,7 @@ public class RobotContainer {
 
     driverBindings.bind(
         IntakeCommands.intake(intake, RPM.of(60)), TriggerBehavior.WHILE_TRUE, XboxCL.A);
-        
+
     driverBindings.build();
     operatorBindings.build();
   }
