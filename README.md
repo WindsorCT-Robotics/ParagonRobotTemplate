@@ -73,7 +73,7 @@ src/main/java/frc/robot/
 ├── Main.java                  Entry point. Don't edit.
 ├── Robot.java                 Lifecycle, AdvantageKit setup, scheduler.
 ├── Constants.java             Runtime mode (REAL/SIM/REPLAY) and global tuning values.
-├── CanID.java                 Pairs a CAN ID with its bus name.
+├── CanID.java                 A CAN ID, validated to the 6-bit range (0-63).
 ├── CanIDConstants.java        Every CAN ID on the robot. Update here when hardware changes.
 ├── PowerLogger.java           Per-subsystem current and power logging.
 ├── BuildConstants.java        Generated at build time. Don't edit.
