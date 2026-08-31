@@ -226,8 +226,17 @@ public class Drive extends SubsystemBase {
    */
   public void runVelocity(ChassisSpeeds speeds) {
     // Calculate module setpoints
+
+    // Modules hold a fixed speed and angle for the full 20ms loop. That angle is
+    // robot-relative, so while the robot rotates, the wheel direction sweeps in the
+    // field frame and the robot traces an arc rather than the straight line the
+    // kinematics assumed. Discretize solves for the arc that lands on the intended
+    // pose instead. 0.02 is the loop period.
     ChassisSpeeds discreteSpeeds = ChassisSpeeds.discretize(speeds, 0.02);
+    // Converts discreteSpeeds into individual module states.
     SwerveModuleState[] setpointStates = kinematics.toSwerveModuleStates(discreteSpeeds);
+    // Proportionally scales down all module speeds if at least one module exceeds
+    // the max speed.
     SwerveDriveKinematics.desaturateWheelSpeeds(setpointStates, TunerConstants.kSpeedAt12Volts);
 
     // Log unoptimized setpoints and setpoint speeds
