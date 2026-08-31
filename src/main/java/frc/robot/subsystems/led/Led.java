@@ -1,14 +1,14 @@
 package frc.robot.subsystems.led;
 
-import edu.wpi.first.wpilibj.util.Color;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import org.wpilib.util.Color;
+import org.wpilib.command2.SubsystemBase;
 import java.util.Optional;
 import org.littletonrobotics.junction.Logger;
 
 public class Led extends SubsystemBase {
   private final String logKey;
   private final LedIO ledIO;
-  private final LedIOInputsAutoLogged ledInputs = new LedIOInputsAutoLogged();
+  private final LedIOInputsAutoLogged inputs = new LedIOInputsAutoLogged();
   private Optional<LedPattern> prevPattern = Optional.empty();
 
   public Led(String name, LedIO ledIO) {
@@ -18,8 +18,8 @@ public class Led extends SubsystemBase {
 
   @Override
   public void periodic() {
-    ledIO.updateInputs(ledInputs);
-    Logger.processInputs(logKey, ledInputs);
+    ledIO.updateInputs(inputs);
+    Logger.processInputs(logKey, inputs);
   }
 
   public void setPattern(LedPattern pattern, Color color, int startIndex, int endIndex) {
