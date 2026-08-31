@@ -1,9 +1,9 @@
 package frc.robot.subsystems.intake;
 
-import edu.wpi.first.units.measure.AngularVelocity;
-import edu.wpi.first.wpilibj.Alert;
-import edu.wpi.first.wpilibj.Alert.AlertType;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import org.wpilib.units.measure.AngularVelocity;
+import org.wpilib.command2.SubsystemBase;
+import org.wpilib.driverstation.Alert;
+
 import frc.robot.PowerLogger;
 import frc.robot.PowerLogger.Device;
 import org.littletonrobotics.junction.Logger;
@@ -12,7 +12,7 @@ public class Intake extends SubsystemBase {
   private final IntakeIO io;
   private final IntakeIOInputsAutoLogged inputs = new IntakeIOInputsAutoLogged();
   private final Alert disconnectedMotorAlert =
-      new Alert("Intake Motor disconnected.", AlertType.kError);
+      new Alert("Intake Motor disconnected.", Alert.Level.HIGH);
 
   public Intake(IntakeIO io) {
     this.io = io;
