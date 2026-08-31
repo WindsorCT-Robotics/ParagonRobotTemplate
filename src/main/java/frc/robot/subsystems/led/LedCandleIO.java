@@ -1,5 +1,6 @@
 package frc.robot.subsystems.led;
 
+import com.ctre.phoenix6.CANBus;
 import com.ctre.phoenix6.controls.ColorFlowAnimation;
 import com.ctre.phoenix6.controls.FireAnimation;
 import com.ctre.phoenix6.controls.LarsonAnimation;
@@ -10,14 +11,14 @@ import com.ctre.phoenix6.controls.StrobeAnimation;
 import com.ctre.phoenix6.controls.TwinkleAnimation;
 import com.ctre.phoenix6.hardware.CANdle;
 import com.ctre.phoenix6.signals.RGBWColor;
-import edu.wpi.first.wpilibj.util.Color;
+import org.wpilib.util.Color;
 import frc.robot.CanID;
 
 public class LedCandleIO implements LedIO {
   private final CANdle led;
 
-  public LedCandleIO(CanID can) {
-    led = new CANdle(can.ID());
+  public LedCandleIO(CanID can, CANBus bus) {
+    led = new CANdle(can.ID(), bus);
   }
 
   @Override
