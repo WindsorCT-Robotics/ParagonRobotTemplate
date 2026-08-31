@@ -3,7 +3,6 @@ package frc.robot.subsystems.intake;
 import static org.wpilib.units.Units.Value;
 import static org.wpilib.units.Units.Volts;
 
-import com.ctre.phoenix6.CANBus;
 import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.DutyCycleOut;
@@ -12,15 +11,15 @@ import com.ctre.phoenix6.hardware.TalonFX;
 import org.wpilib.units.measure.AngularVelocity;
 import org.wpilib.units.measure.Dimensionless;
 import org.wpilib.units.measure.Voltage;
-import frc.robot.CanID;
+import frc.robot.robot_container.CanIDConstants.MotorID;
 
 public class IntakeIOTalonFX implements IntakeIO {
   private final TalonFX motor;
   private final DutyCycleOut dutyCycleRequest = new DutyCycleOut(0);
   private final VelocityTorqueCurrentFOC velocityRequest = new VelocityTorqueCurrentFOC(0);
 
-  public IntakeIOTalonFX(CanID can, CANBus bus) {
-    motor = new TalonFX(can.ID(), bus);
+  public IntakeIOTalonFX(MotorID motorID) {
+    motor = new TalonFX(motorID.can().ID(), motorID.bus());
     motor
         .getConfigurator()
         .apply(

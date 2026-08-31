@@ -1,6 +1,6 @@
 package frc.robot.subsystems.led;
 
-import edu.wpi.first.wpilibj.util.Color;
+import org.wpilib.util.Color;
 import org.littletonrobotics.junction.AutoLog;
 
 public interface LedIO {

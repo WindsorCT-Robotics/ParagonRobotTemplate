@@ -1,8 +1,8 @@
 package frc.robot.subsystems.intake;
 
-import edu.wpi.first.units.measure.AngularVelocity;
-import edu.wpi.first.units.measure.Dimensionless;
-import edu.wpi.first.units.measure.Voltage;
+import org.wpilib.units.measure.AngularVelocity;
+import org.wpilib.units.measure.Dimensionless;
+import org.wpilib.units.measure.Voltage;
 import org.littletonrobotics.junction.AutoLog;
 
 public interface IntakeIO {

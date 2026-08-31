@@ -7,19 +7,18 @@
 
 package frc.robot.robot_container;
 
-import static edu.wpi.first.units.Units.RPM;
+import static org.wpilib.units.Units.RPM;
 
 import com.pathplanner.lib.auto.AutoBuilder;
-import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.geometry.Transform3d;
-import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.Commands;
-import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
-import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine;
-import frc.robot.CanIDConstants;
+import org.wpilib.math.geometry.Pose2d;
+import org.wpilib.math.geometry.Rotation2d;
+import org.wpilib.math.geometry.Transform3d;
+import org.wpilib.driverstation.Gamepad;
+import org.wpilib.driverstation.GenericHID;
+import org.wpilib.command2.Command;
+import org.wpilib.command2.Commands;
+import org.wpilib.command2.sysid.SysIdRoutine;
+
 import frc.robot.Constants;
 import frc.robot.Robot;
 import frc.robot.commands.DriveCommands;
@@ -60,12 +59,12 @@ public class RobotContainer {
   private final Intake intake;
 
   // Controller
-  private final CommandXboxController driver = new CommandXboxController(0);
-  private final CommandXboxController operator = new CommandXboxController(1);
+  private final Gamepad driver = new Gamepad(0);
+  private final Gamepad operator = new Gamepad(1);
 
   // Bindings
-  private final Bindings driverBindings = new Bindings("Driver", driver.getHID());
-  private final Bindings operatorBindings = new Bindings("Operator", operator.getHID());
+  private final Bindings driverBindings = new Bindings("Driver", driver);
+  private final Bindings operatorBindings = new Bindings("Operator", operator);
 
   // Dashboard inputs
   private final LoggedDashboardChooser<Command> autoChooser;
@@ -90,7 +89,7 @@ public class RobotContainer {
                 drive::addVisionMeasurement,
                 new VisionIOLimelight(VisionConstants.kCamera0Name, drive::getRotation));
 
-        intake = new Intake(new IntakeIOTalonFX(CanIDConstants.kIntakeMotor));
+        intake = new Intake(new IntakeIOTalonFX(CanIDConstants.Intake.INTAKE_MOTOR));
 
         break;
 
@@ -159,8 +158,8 @@ public class RobotContainer {
   /**
    * Use this method to define your button->command mappings. Buttons can be created by
    * instantiating a {@link GenericHID} or one of its subclasses ({@link
-   * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
-   * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
+   * org.wpilib.driverstation.Joystick} or {@link XboxController}), and then passing it to a {@link
+   * org.wpilib.command2.button.JoystickButton}.
    */
   private void configureButtonBindings() {
     // Default command, normal field-relative drive
