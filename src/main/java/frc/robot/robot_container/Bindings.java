@@ -1,8 +1,8 @@
 package frc.robot.robot_container;
 
-import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.button.Trigger;
+import org.wpilib.driverstation.Gamepad;
+import org.wpilib.command2.Command;
+import org.wpilib.command2.button.Trigger;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -57,7 +57,7 @@ public class Bindings {
   private record BindingLog(BooleanSupplier bindingSupplier, String name) {}
 
   private final String name;
-  private final XboxController controller;
+  private final Gamepad controller;
   private final ArrayList<BindingLog> layout = new ArrayList<>();
   private final ArrayList<QueueBinding> queuedBindings = new ArrayList<>();
   private static final double TRIGGER_THRESHOLD = 0.5; // Percent
@@ -65,7 +65,7 @@ public class Bindings {
 
   private boolean build = false;
 
-  public Bindings(String name, XboxController controller) {
+  public Bindings(String name, Gamepad controller) {
     this.name = name;
     this.controller = controller;
   }
@@ -184,16 +184,16 @@ public class Bindings {
     BooleanSupplier buttonSupplier;
     switch (button) {
       case A:
-        buttonSupplier = () -> controller.getAButton();
+        buttonSupplier = () -> controller.getSouthFaceButton();
         break;
       case B:
-        buttonSupplier = () -> controller.getBButton();
+        buttonSupplier = () -> controller.getEastFaceButton();
         break;
       case X:
-        buttonSupplier = () -> controller.getXButton();
+        buttonSupplier = () -> controller.getWestFaceButton();
         break;
       case Y:
-        buttonSupplier = () -> controller.getYButton();
+        buttonSupplier = () -> controller.getNorthFaceButton();
         break;
       case LB:
         buttonSupplier = () -> controller.getLeftBumperButton();
@@ -220,16 +220,16 @@ public class Bindings {
         buttonSupplier = () -> controller.getStartButton();
         break;
       case D_UP:
-        buttonSupplier = () -> controller.getPOV() == 0;
+        buttonSupplier = () -> controller.getDpadUpButton();
         break;
       case D_DOWN:
-        buttonSupplier = () -> controller.getPOV() == 180;
+        buttonSupplier = () -> controller.getDpadDownButton();
         break;
       case D_RIGHT:
-        buttonSupplier = () -> controller.getPOV() == 90;
+        buttonSupplier = () -> controller.getDpadRightButton();
         break;
       case D_LEFT:
-        buttonSupplier = () -> controller.getPOV() == 270;
+        buttonSupplier = () -> controller.getDpadLeftButton();
         break;
       default:
         throw new IllegalStateException("Unknown XboxCL Enum: " + button.toString());
